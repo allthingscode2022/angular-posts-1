@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Authentication successfull",
+  "user": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2FybG9zIGNvZWxsbyIsImVtYWlsIjoiY29lbGxvQGV4YW1wbGUuY29tIiwiaWF0IjoxNTQ4NzM3MzI5LCJleHAiOjE1NDg3NDA5Mjl9.9b8WVmoR1QVXl_utM-gLj0m8xvkJAgDtJUupYZJV-V8",
+    "firstname": "carlos",
+    "lastname": "coello",
+    "email": "coello@example.com",
+    "role": "client"
+  }
+}

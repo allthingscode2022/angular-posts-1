@@ -1,0 +1,52 @@
+.single-post {
+  width: 800px;
+  margin: 0 auto;
+
+  header {
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  p {
+    @media screen and (max-width: 767px) {
+      font-size: 1rem;
+    }
+  }
+
+  div {
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.form-container {
+  width: 800px;
+  margin: 0 auto;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin: 0;
+  }
+
+  .form-row {
+    .edit-buttons {
+      input,
+      button {
+        @media screen and (max-width: 767px) {
+          width: 100%;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}

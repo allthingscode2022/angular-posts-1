@@ -1,0 +1,121 @@
+<!-- container wrapper -->
+<div class="container-fluid p-0">
+  <div class="form-container bg-light p-5">
+    <div class="container">
+      <header><h4>You can Create, Edit or Delete your Posts :)</h4></header>
+      <button
+        class="btn btn-info"
+        *ngIf="!hideForm"
+        (click)="cancelPostCreation()"
+      >
+        I want to create a post
+      </button>
+      <!-- form for creating posts -->
+      <form
+        [formGroup]="theForm"
+        enctype="multipart/form-data"
+        (ngSubmit)="onSubmit($event)"
+        *ngIf="hideForm"
+        class="post-form"
+        novalidate
+      >
+        <div class="form-row">
+          <div class="col-sm-12 col-md-6">
+            <label for="title">title</label>
+            <!-- title input -->
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              formControlName="title"
+              placeholder="give a title to your post"
+            />
+            <!-- validation for title input -->
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="f.title.dirty && f.title.errors"
+            >
+              <small *ngIf="f.title.errors.required">a title is required</small>
+              <small *ngIf="f.title.errors.maxlength"
+                >30 characters max for title</small
+              >
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="image">image</label>
+            <!-- file input -->
+            <input
+              type="file"
+              class="form-control"
+              (change)="onFileChange($event)"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="body">body</label>
+          <!-- body textarea -->
+          <textarea
+            rows="4"
+            cols="50"
+            class="form-control"
+            formControlName="body"
+            placeholder="give your post a body"
+          ></textarea>
+          <!-- validation for body textarea-->
+          <div
+            class="invalid-feedback d-block"
+            *ngIf="f.body.dirty && f.body.errors"
+          >
+            <small *ngIf="f.body.errors.required">a body is required</small>
+            <small *ngIf="f.body.errors.minlength"
+              >title must be at least 200 characters short</small
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <!-- submit input, disable if form is invalid -->
+          <input
+            type="submit"
+            value="Upload Post Please"
+            class="btn btn-primary"
+            [disabled]="!theForm.valid"
+          />
+          <button
+            type="button"
+            class="btn btn-warning mx-2"
+            (click)="cancelPostCreation()"
+          >
+            cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- posts are displayed in cards inside a for loop -->
+  <div class="container" *ngIf="allPosts.length">
+    <div class="cards my-5 d-flex flex-wrap justify-content-center">
+      <div class="card m-2" *ngFor="let p of allPosts">
+        <img [src]="p.image" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ p.title }}</h5>
+          <p class="card-text">{{ p.body | excerpt }}</p>
+        </div>
+        <div class="card-footer d-flex flex-column">
+          <a
+            [routerLink]="['/posts', p._id]"
+            class="btn btn-primary"
+            >view post</a
+          >
+          <small
+            ><strong>created by:</strong>
+            {{ p.email === email ? 'my post' : p.creator }}</small
+          >
+          <small
+            ><strong>post created on:</strong>
+            {{ p.createdOn | date: 'medium' }}</small
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
