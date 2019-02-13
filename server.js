@@ -8,7 +8,7 @@ const morgan = require("morgan");
 // mongodb module for building models schemas and connecting mongodb
 const mongoose = require("mongoose");
 // create a port
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 5000;
 const path = require("path");
 
 mongoose.connect(
