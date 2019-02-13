@@ -1,10 +1,6 @@
 // importing express for creating our server
 const express = require("express");
 const app = express();
-// allow requests from client for development purposes
-const cors = require("cors");
-// log each route request for development purposes
-const morgan = require("morgan");
 // mongodb module for building models schemas and connecting mongodb
 const mongoose = require("mongoose");
 // create a port
@@ -19,11 +15,9 @@ mongoose.connect(
 );
 
 // middleware
-app.use(cors());
 app.use(express.static(path.join(__dirname, "/dist/posts")));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb", extended: true }));
-app.use(morgan("dev"));
 
 // import User Controller
 const UserController = require("./controllers/UserController");
