@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   // server url for user routes
-  public ROOT_URL = 'user';
+  public ROOT_URL = '/user';
   constructor(private http: HttpClient) {}
 
   // post request method for adding a user
