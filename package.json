@@ -3,17 +3,20 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.0",
+    "@angular/cli": "~6.1.5",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
+    "@angular/compiler-cli": "^6.1.0",
     "@angular/core": "^6.1.0",
     "@angular/forms": "^6.1.0",
     "@angular/http": "^6.1.0",
@@ -23,7 +26,6 @@
     "@auth0/angular-jwt": "^2.1.0",
     "angular2-flash-messages": "^3.0.1",
     "bcrypt": "^3.0.3",
-    "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
@@ -32,6 +34,7 @@
     "mongoose": "^5.4.4",
     "multer": "^1.4.1",
     "rxjs": "^6.0.0",
+    "typescript": "~2.8.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -57,5 +60,9 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.8.0"
+  },
+  "engines": {
+    "node": "8.11.4",
+    "npm": "6.7.0"
   }
 }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
   // server url for post routes
-  public ROOT_URL = 'http://localhost:2000/post';
+  public ROOT_URL = 'post';
 
   constructor(private http: HttpClient) {}
 
