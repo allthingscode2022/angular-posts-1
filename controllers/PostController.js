@@ -9,7 +9,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, path.join(__dirname, "/uploads"));
   },
   filename: function(req, file, cb) {
     cb(
@@ -60,7 +60,6 @@ router.get("/all", (req, res) => {
 
 router.get("/single/:id", (req, res) => {
   // if id params does not exist do something
-  console.log(req.params.id);
   if (!req.params.id) {
     res.status(400).send({
       success: false,
@@ -117,11 +116,12 @@ router.post("/add", upload.single("image"), (req, res) => {
           message: "body is required"
         });
       } else {
+        console.log(req.file);
         // if we have all params create the post
         Post.create(
           {
             title: req.body.title,
-            image: `uploads/${req.file.filename}`,
+            image: req.file.path,
             body: req.body.body,
             email: req.body.email,
             creator: req.body.name
