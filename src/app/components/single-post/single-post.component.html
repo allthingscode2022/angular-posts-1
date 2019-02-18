@@ -25,7 +25,7 @@
       <small><strong>created by:</strong> {{ post.post.creator }}</small>
       <small *ngIf="post.post.lastUpdated"
         ><strong>post last updated:</strong>
-        {{ post.post.lastUpdated | date: 'medium' }}</small
+        {{ post.post.lastUpdated | date: "medium" }}</small
       >
     </div>
   </div>
@@ -104,12 +104,16 @@
           <!-- submit input, if form not valid disable button -->
           <input
             type="submit"
-            value="uploading ? 'Updating post ...' : 'Update Post Please'"
+            [value]="updating ? 'Updating post ...' : 'Update Post Please'"
             class="btn btn-primary"
             [disabled]="!theForm.valid"
           />
           <!-- cancel updating post -->
-          <button class="btn btn-warning mx-2" (click)="toggleEditPostForm()" [disabled]="uploading">
+          <button
+            class="btn btn-warning mx-2"
+            (click)="toggleEditPostForm()"
+            [disabled]="uploading"
+          >
             cancel update
           </button>
         </div>

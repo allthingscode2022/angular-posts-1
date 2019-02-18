@@ -11,7 +11,7 @@ import { IPost } from 'src/app/models/Interfaces';
   styleUrls: ['./single-post.component.scss']
 })
 export class SinglePostComponent implements OnInit {
-  public uploading = false;
+  public updating = false;
   // Object property for saving single post that we fetch from server
   public post;
   // Boolean property for displaying ui interaction
@@ -108,7 +108,7 @@ export class SinglePostComponent implements OnInit {
   // method for submitting our form
   public onSubmit(e, post): void {
     e.preventDefault();
-    this.uploading = true;
+    this.updating = true;
     const fd = new FormData();
     fd.append('title', this.theForm.get('title').value);
     fd.append('image', this.theForm.get('image').value || post.image);
@@ -126,7 +126,7 @@ export class SinglePostComponent implements OnInit {
         window.location.reload();
       },
       error => {
-        this.uploading = false;
+        this.updating = false;
         this._flashMessagesService.show(error.error.message, {
           cssClass: 'alert-danger my-5'
         });
