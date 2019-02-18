@@ -211,7 +211,7 @@ router.put("/update/:id", upload.single("image"), (req, res) => {
     });
   } else {
     // if req file is undefined or null or empty
-    const aImage = !req.file ? req.body.image : `uploads/${req.file.filename}`;
+    const aImage = !req.file ? req.body.image : `${req.file.Location}`;
     // we have all params go ahead and update the post
     Post.findOneAndUpdate(
       { _id: req.params.id },

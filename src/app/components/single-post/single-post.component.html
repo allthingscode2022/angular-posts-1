@@ -104,12 +104,12 @@
           <!-- submit input, if form not valid disable button -->
           <input
             type="submit"
-            value="Upload Post Please"
+            value="uploading ? Updating post ... : Update Post Please"
             class="btn btn-primary"
             [disabled]="!theForm.valid"
           />
           <!-- cancel updating post -->
-          <button class="btn btn-warning mx-2" (click)="toggleEditPostForm()">
+          <button class="btn btn-warning mx-2" (click)="toggleEditPostForm()" [disabled]="uploading">
             cancel update
           </button>
         </div>
