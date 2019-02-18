@@ -4,22 +4,36 @@ const Post = require("../models/Post");
 const router = require("express").Router();
 // importing multer for handling upload of images
 const multer = require("multer");
+const mulsterS3 = require("multer-sharp-s3");
+const aws = require("aws-sdk");
 // importing path for grabbing the file extension
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function(req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  }
+aws.config.update({
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.AWS_ACCESS_ID_KEY,
+  region: "us-east-2"
 });
 
-const upload = multer({ storage: storage });
+const s3 = new aws.S3();
+
+const upload = multer({
+  storage: mulsterS3({
+    s3,
+    Bucket: "cc-react-login",
+    ACL: "public-read",
+    resize: {
+      width: 1200,
+      height: 800
+    },
+    KEY: function(req, file, cb) {
+      cb(
+        null,
+        file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+      );
+    }
+  })
+});
 
 /**
  * this route will deliver all posts to the user
@@ -116,12 +130,11 @@ router.post("/add", upload.single("image"), (req, res) => {
           message: "body is required"
         });
       } else {
-        console.log(req.file);
         // if we have all params create the post
         Post.create(
           {
             title: req.body.title,
-            image: req.file.path,
+            image: req.file.Location,
             body: req.body.body,
             email: req.body.email,
             creator: req.body.name
