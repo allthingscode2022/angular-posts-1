@@ -106,13 +106,13 @@
             type="submit"
             [value]="updating ? 'Updating post ...' : 'Update Post Please'"
             class="btn btn-primary"
-            [disabled]="!theForm.valid"
+            [disabled]="!theForm.valid || updating"
           />
           <!-- cancel updating post -->
           <button
             class="btn btn-warning mx-2"
             (click)="toggleEditPostForm()"
-            [disabled]="uploading"
+            [disabled]="updating"
           >
             cancel update
           </button>

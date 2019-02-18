@@ -9,6 +9,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  public registering = false;
   // property for building our form
   public theForm: FormGroup;
 
@@ -46,26 +47,22 @@ export class RegisterComponent implements OnInit {
   // method for submitting our form
   public onSubmit(e): void {
     e.preventDefault();
+    this.registering = true;
     this.uService.addUser(this.theForm.value).subscribe(
       res => {
-        const { success, message } = res;
-        if (success) {
-          this._flashMessagesService.show(message, {
-            cssClass: 'alert alert-success my-5'
-          });
-        } else {
-          this._flashMessagesService.show(message, {
-            cssClass: 'alert alert-danger my-5'
-          });
-        }
+        this.registering = false;
+        this.theForm.reset();
+        const { message } = res;
+        this._flashMessagesService.show(message, {
+          cssClass: 'alert alert-success my-5'
+        });
       },
       err => {
-        const { success, message } = err.error;
-        if (!success) {
-          this._flashMessagesService.show(message, {
-            cssClass: 'alert alert-danger my-5'
-          });
-        }
+        this.registering = false;
+        const { message } = err.error;
+        this._flashMessagesService.show(message, {
+          cssClass: 'alert alert-danger my-5'
+        });
       }
     );
   }
