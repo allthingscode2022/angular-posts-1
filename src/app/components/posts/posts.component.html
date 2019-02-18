@@ -76,14 +76,17 @@
           <!-- submit input, disable if form is invalid -->
           <input
             type="submit"
-            value="Upload Post Please"
+            [value]="
+              uploading ? 'uploading your post ...' : 'Upload Post Please'
+            "
             class="btn btn-primary"
-            [disabled]="!theForm.valid"
+            [disabled]="!theForm.valid || uploading"
           />
           <button
             type="button"
             class="btn btn-warning mx-2"
             (click)="cancelPostCreation()"
+            [disabled]="uploading"
           >
             cancel
           </button>
@@ -101,18 +104,16 @@
           <p class="card-text">{{ p.body | excerpt }}</p>
         </div>
         <div class="card-footer d-flex flex-column">
-          <a
-            [routerLink]="['/posts', p._id]"
-            class="btn btn-primary"
+          <a [routerLink]="['/posts', p._id]" class="btn btn-primary"
             >view post</a
           >
           <small
             ><strong>created by:</strong>
-            {{ p.email === email ? 'my post' : p.creator }}</small
+            {{ p.email === email ? "my post" : p.creator }}</small
           >
           <small
             ><strong>post created on:</strong>
-            {{ p.createdOn | date: 'medium' }}</small
+            {{ p.createdOn | date: "medium" }}</small
           >
         </div>
       </div>

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 // create a port
 const PORT = process.env.PORT || 5000;
 const path = require("path");
+const cors = require("cors");
 
 mongoose.connect(
   `mongodb://${process.env.MONGO_USER}:${
@@ -15,7 +16,8 @@ mongoose.connect(
 );
 
 // middleware
-app.use(express.static(path.join(__dirname, "/dist/posts")));
+app.use(cors());
+app.use(express.static(path.join(__dirname, "/dist")));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb", extended: true }));
 

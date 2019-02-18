@@ -10,6 +10,7 @@ import { IPosts } from 'src/app/models/Interfaces';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
+  public uploading = false;
   // Array Object property that stores posts
   public allPosts: IPosts['post'] = [];
   // property that will hold our form
@@ -48,6 +49,7 @@ export class PostsComponent implements OnInit {
   // method for submitting the form
   public onSubmit(e: Event): void {
     e.preventDefault();
+    this.uploading = true;
     const fd = new FormData();
     fd.append('title', this.theForm.get('title').value);
     fd.append('image', this.theForm.get('image').value);
@@ -58,15 +60,17 @@ export class PostsComponent implements OnInit {
       data => {
         this.getPosts();
         this.theForm.reset();
+        this.uploading = false;
         this._flashMessagesService.show(data.message, {
           cssClass: 'alert-success my-5'
         });
       },
-      error =>
+      error => {
+        this.uploading = false;
         this._flashMessagesService.show(error.error.message, {
           cssClass: 'alert-danger my-5'
-        })
-    );
+        });
+      });
   }
 
   // method for updating form image value
