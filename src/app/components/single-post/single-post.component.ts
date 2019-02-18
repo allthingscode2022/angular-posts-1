@@ -118,7 +118,7 @@ export class SinglePostComponent implements OnInit {
     fd.append('lastUpdated', JSON.stringify(Date.now()));
     this.pService.updatePost(fd, post._id).subscribe(
       data => {
-        this.uploading = false;
+        this.updating = false;
         this._flashMessagesService.show(data.message, {
           cssClass: 'alert-success my-5'
         });
