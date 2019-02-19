@@ -1,13 +1,17 @@
-# Posts
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+
+## Posts
 
 A web app where you can create, read, update and delete blog posts.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+### Tech Stack
 
-## Development server
+HTML, CSS, Javascript, Angular, Express, Mongoose, Multer, Bcrypt, Jsonwebtoken
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Further help
+### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
