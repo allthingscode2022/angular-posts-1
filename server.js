@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
 const path = require("path");
 
-mongoose.connect(`mongodb://${process.env.MONGODB_URI}`, {
+mongoose.connect(`${process.env.MONGODB_URI}`, {
   useNewUrlParser: true
 });
 
