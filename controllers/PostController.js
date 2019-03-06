@@ -8,12 +8,6 @@ const gcsSharp = require("multer-sharp");
 // importing path for grabbing the file extension
 const path = require("path");
 
-aws.config.update({
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-  accessKeyId: process.env.AWS_ACCESS_ID_KEY,
-  region: "us-east-2"
-});
-
 const storage = gcsSharp({
   filename: (req, file, cb) => {
     cb(
@@ -22,7 +16,7 @@ const storage = gcsSharp({
     );
   },
   bucket: "ccblogposts",
-  projectId: "647756367460",
+  projectId: process.env.PROJECT_ID,
   acls: "publicRead",
   size: {
     width: 1200,
