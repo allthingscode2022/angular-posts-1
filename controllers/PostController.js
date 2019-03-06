@@ -4,8 +4,7 @@ const Post = require("../models/Post");
 const router = require("express").Router();
 // importing multer for handling upload of images
 const multer = require("multer");
-const mulsterS3 = require("multer-sharp-s3");
-const aws = require("aws-sdk");
+const gcsSharp = require("multer-sharp");
 // importing path for grabbing the file extension
 const path = require("path");
 
@@ -15,25 +14,24 @@ aws.config.update({
   region: "us-east-2"
 });
 
-const s3 = new aws.S3();
-
-const upload = multer({
-  storage: mulsterS3({
-    s3,
-    Bucket: "cc-react-login",
-    ACL: "public-read",
-    resize: {
-      width: 1200,
-      height: 800
-    },
-    KEY: function(req, file, cb) {
-      cb(
-        null,
-        file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-      );
-    }
-  })
+const storage = gcsSharp({
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+  bucket: "ccblogposts",
+  projectId: "647756367460",
+  acls: "publicRead",
+  size: {
+    width: 1200,
+    height: 800
+  },
+  max: true
 });
+
+const upload = multer({ storage: storage });
 
 /**
  * this route will deliver all posts to the user
