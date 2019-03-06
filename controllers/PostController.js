@@ -17,7 +17,7 @@ const storage = gcsSharp({
   },
   bucket: "ccblogposts",
   projectId: process.env.PROJECT_ID,
-  acls: "publicRead",
+  acl: "publicRead",
   size: {
     width: 1200,
     height: 800
