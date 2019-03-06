@@ -7,12 +7,9 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
 const path = require("path");
 
-mongoose.connect(
-  `mongodb://${process.env.MONGO_USER}:${
-    process.env.MONGO_PASS
-  }@ds133865.mlab.com:33865/heroku_tls1cg5h`,
-  { useNewUrlParser: true }
-);
+mongoose.connect(`mongodb://${process.env.MONGODB_URI}`, {
+  useNewUrlParser: true
+});
 
 // middleware
 app.use(express.static(path.join(__dirname, "/dist/posts")));
