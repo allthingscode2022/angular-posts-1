@@ -19,13 +19,13 @@ const s3 = new aws.S3();
 
 const storage = multerS3({
   s3,
-  Bucket: `${process.env.BUCKET}`,
-  ACL: `${process.env.ACL}`,
+  Bucket: process.env.BUCKET,
+  ACL: process.env.ACL,
   resize: {
     width: 1200,
     height: 800
   },
-  KEY: function(req, file, cb) {
+  Key: function(req, file, cb) {
     cb(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
@@ -109,6 +109,7 @@ router.get("/single/:id", (req, res) => {
  * @returns {object} error | json
  */
 router.post("/add", upload.single("image"), (req, res) => {
+  console.log(req.file);
   // if title does not exist on the req body do something
   if (!req.body.title) {
     res.status(400).send({
@@ -203,6 +204,7 @@ router.delete("/delete/:id", (req, res) => {
  */
 
 router.put("/update/:id", upload.single("image"), (req, res) => {
+  console.log(req.file);
   // if id params does not exist do something
   if (!req.params.id) {
     res.status(400).send({
